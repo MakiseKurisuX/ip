@@ -123,6 +123,23 @@ public class ChatBot {
                   " OOPS!!! " + e.getMessage() + "\r\n" +
                   "____________________________________________________________");
         }
+      } else if (task.startsWith("delete")) {
+        try {
+          int number = Integer.parseInt(task.split(" ")[1]) - 1;
+          if (number < 0 || number >= tasks.size()) {
+            throw new HeliosException("You input an invalid number");
+          }
+          System.out.println("____________________________________________________________\r\n" +
+                  "Noted. I've removed this task:\r\n  " +
+                  tasks.get(number).getDescription() +
+                  "\nNow you have " + tasks.size() + " tasks in the list.\r\n" +
+                  "\n____________________________________________________________");
+          tasks.remove(number);
+        } catch (Exception e) {
+          System.out.println("____________________________________________________________\r\n" +
+                  " OOPS!!! " + e.getMessage() + "\r\n" +
+                  "____________________________________________________________");
+        }
       } else {
         System.out.println("____________________________________________________________\r\n" +
                 "OOPS!!! I'm sorry, but I don't know what that means :-(\r\n  " +
