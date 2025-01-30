@@ -1,25 +1,29 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import Parser.DateTimeParser;
+
 public class Event extends Task {
-    private String from;
-    private String to;
+    private LocalDateTime  from;
+    private LocalDateTime  to;
 
     public Event(String description, String from, String to) {
         super(description, "E");
-        this.from = from;
-        this.to = to;
+        this.from = DateTimeParser.parseDateTime(from);  
+        this.to = DateTimeParser.parseDateTime(to);
     }
 
     public String getFrom() {
-        return this.from;
+        return DateTimeParser.stringDateTime(this.from);
     }
 
     public String getTo() {
-        return this.to;
+        return DateTimeParser.stringDateTime(this.to);
     }
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " (from: " + from + " to: " + to + ")";
+        return super.getDescription() + " (from: " + DateTimeParser.formatDateTime(this.from) + " to: " + DateTimeParser.formatDateTime(this.to) + ")";
     }
 }
