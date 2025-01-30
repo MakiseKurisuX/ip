@@ -1,0 +1,4 @@
+T | 0 | work
+T | 0 | more work
+T | 0 | most work
+D | 0 | work | Sunday

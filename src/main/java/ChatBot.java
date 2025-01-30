@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.IOException;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -8,11 +12,59 @@ import task.Todo;
 import task.HeliosException;
 
 public class ChatBot {
+
+  public static void saveTasks (ArrayList<Task> tasks) {
+    try (PrintWriter writer = new PrintWriter("./data/helios.txt")) {
+      for (Task task : tasks) {
+        String taskType = task instanceof Todo ? "T" : task instanceof Deadline ? "D" : "E";
+        String isDone = task.getisDone() ? "1" : "0";
+        String taskDetails = "";
+
+        if (taskType.equals("T")) {
+          taskDetails = task.getPureDescription();
+        } else if (taskType.equals("D")) {
+          Deadline deadline = (Deadline) task;
+          taskDetails = deadline.getPureDescription() + " | " + deadline.getBy();
+        } else {
+          Event event = (Event) task;
+          taskDetails = event.getPureDescription() + " | " + event.getFrom() + " - " + event.getTo();
+        }
+
+        writer.println(taskType + " | " + isDone + " | " + taskDetails);
+      }
+    } catch (IOException e) {
+        System.out.println("Error writing to ./data/helios.txt: " + e.getMessage());
+    }
+  }
+
   public static void main(String[] args) {
 
     Scanner in = new Scanner(System.in);
 
     ArrayList<Task> tasks = new ArrayList<>();
+
+    /*
+     * Scan files
+     */
+    try (Scanner fileScanner = new Scanner(new File("./data/helios.txt"))) {
+      while (fileScanner.hasNextLine()) {
+        String currentLine = fileScanner.nextLine();
+        String[] splittedLine = currentLine.split(" \\| ");
+        if (splittedLine[0].equals("T")) {
+          tasks.add(new Todo(splittedLine[2]));
+        } else if (splittedLine[0].equals("D")) {
+          tasks.add(new Deadline(splittedLine[2], splittedLine[3]));
+        } else if (splittedLine[0].equals("E")) {
+          String[] fromToSplitted = splittedLine[3].split(" - ");
+          tasks.add(new Event(splittedLine[2], fromToSplitted[0], fromToSplitted[1]));
+        }
+        if (splittedLine[1].equals("1")) {
+          tasks.get(tasks.size()-1).setisDone(true);
+        }
+      }
+    } catch (IOException e) {
+      System.out.println("File does not exist. Creating File.");
+    }
 
     System.out.println("____________________________________________________________\r\n" + //
             " Hello! I'm Ervin Chatbot!\r\n" + //
@@ -145,6 +197,12 @@ public class ChatBot {
                 "OOPS!!! I'm sorry, but I don't know what that means :-(\r\n  " +
                 "____________________________________________________________");
       }
+
+      /*
+       * Write into File
+       */
+      saveTasks(tasks);
+
     }
 
   }

@@ -15,11 +15,19 @@ public class Task {
       return (isDone ? "X" : " "); 
   }
 
+  public String getPureDescription () {
+      return this.description;
+  }
+
   public String getDescription () {
-    return "[" + this.type + "]" + "[" + getStatusIcon() + "] " + this.description;
+      return "[" + this.type + "]" + "[" + getStatusIcon() + "] " + this.description;
+  }
+
+  public boolean getisDone() {
+      return this.isDone;
   }
 
   public void setisDone (boolean b) {
-    this.isDone = b;
+      this.isDone = b;
   }
 }
