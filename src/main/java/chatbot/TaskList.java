@@ -119,4 +119,27 @@ public class TaskList {
     }
     return returnedString;
   }
+
+  /*
+   * Returns a formatted list of all tasks matching the keyword.
+   * If there are no tasks, returns "There are no matching tasks!"
+   *
+   * @return A formatted string containing all tasks that match the keyword.
+   */
+  public String findTasks(String keyword) {
+    String returnedString = "Here are all the matching tasks in your list";
+    for (Task task : tasks) {
+      String[] descriptionWords = task.getPureDescription().split(" ");
+      for (String word : descriptionWords) {
+        if (word.trim().equals(keyword)) {
+          returnedString += "\n" + task.getDescription();
+          break;
+        }
+      }
+    }
+    if (returnedString.equals("Here are all the matching tasks in your list\n")) {
+      return "There are no matching tasks!";
+    }
+    return returnedString;
+  }
 }

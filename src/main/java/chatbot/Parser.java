@@ -75,4 +75,18 @@ public class Parser {
     return parts;
   }
 
+  /*
+   * Extracts the description of a Keyword from user input.
+   * 
+   * @param task The full user input string.
+   * @return The extracted keyword.
+   * @throws HeliosException If the description is empty.
+   */
+  public String getKeyword(String task) throws HeliosException {
+    if (task.substring(5).equals("")) {
+      throw new HeliosException("You must input a keyword.");
+    }
+    return task.substring(5);
+  }
+
 }

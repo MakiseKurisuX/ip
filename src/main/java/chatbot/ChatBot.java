@@ -110,6 +110,14 @@ public class ChatBot {
         } catch (Exception e) {
           ui.showError(e.getMessage());
         }
+      } else if (task.startsWith("find")) {
+        try {
+          String keyword = parser.getKeyword(task);
+          String returnedTasks = tasks.findTasks(keyword);
+          ui.showMessage(returnedTasks);
+        } catch (Exception e) {
+          ui.showError(e.getMessage());
+        }
       } else {
         ui.showError("I'm sorry, but I don't know what that means :-(");
       }
