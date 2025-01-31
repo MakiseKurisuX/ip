@@ -27,6 +27,10 @@ public class Task {
       return this.isDone;
   }
 
+  public String getType() {
+        return this.type;
+  }
+
   public void setisDone (boolean b) {
       this.isDone = b;
   }
