@@ -1,4 +1,4 @@
-package Parser;
+package chatbot;
 
 import task.HeliosException;
 

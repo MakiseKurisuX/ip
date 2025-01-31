@@ -1,3 +1,4 @@
+package chatbot;
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Storage {
   }
 
   public void saveTasks(TaskList tasks) {
-    try (PrintWriter writer = new PrintWriter("./data/helios.txt")) {
+    try (PrintWriter writer = new PrintWriter(filePath)) {
       ArrayList<Task> tasksArr = tasks.getTasks();
       for (Task task : tasksArr) {
         String taskType = task instanceof Todo ? "T" : task instanceof Deadline ? "D" : "E";

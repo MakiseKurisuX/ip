@@ -1,3 +1,4 @@
+package chatbot;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,8 +12,6 @@ import task.Task;
 import task.Todo;
 import task.HeliosException;
 
-import Parser.Parser;
-
 public class ChatBot {
 
   private Ui ui;
@@ -23,7 +22,7 @@ public class ChatBot {
   public ChatBot() {
     ui = new Ui();
     tasks = new TaskList();
-    storage = new Storage("./data/helios.txt");
+    storage = new Storage("../data/helios.txt");
     parser = new Parser();
   }
 
