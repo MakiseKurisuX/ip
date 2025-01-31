@@ -137,7 +137,7 @@ public class TaskList {
         }
       }
     }
-    if (returnedString.equals("Here are all the matching tasks in your list\n")) {
+    if (returnedString.equals("Here are all the matching tasks in your list")) {
       return "There are no matching tasks!";
     }
     return returnedString;
