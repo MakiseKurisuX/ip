@@ -18,7 +18,7 @@ public class DateTimeParser {
     } catch (Exception i) {
       try {
         LocalDate dateOnly = LocalDate.parse(input, DATE_FORMAT);
-        return LocalDateTime.of(dateOnly, LocalTime.of(18, 0)); // Default to 6 PM
+        return LocalDateTime.of(dateOnly, LocalTime.of(10, 0)); // Java needs random time value to convert into format.
       } catch (Exception e) {
         throw new IllegalArgumentException("Error in parsing Date. Use 'd/M/yyyy HHmm' or 'd/M/yyyy'.");
       }
