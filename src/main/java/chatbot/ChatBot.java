@@ -12,6 +12,10 @@ import task.Task;
 import task.Todo;
 import task.HeliosException;
 
+/*
+ * The ChatBot class represents a simple chatbot application
+ * that manages tasks such as ToDos, Deadlines and Events.
+ */
 public class ChatBot {
 
   private Ui ui;
@@ -19,6 +23,10 @@ public class ChatBot {
   private TaskList tasks;
   private Parser parser;
 
+  /*
+   * Constructor to create a ChatBot instance.
+   * Initializes user interface, task list, storage, and parser.
+   */
   public ChatBot() {
     ui = new Ui();
     tasks = new TaskList();
@@ -26,6 +34,10 @@ public class ChatBot {
     parser = new Parser();
   }
 
+  /*
+   * Runs the chatbot, handles user input and executes commands in a loop.
+   * The chatbot will run commands until the user types 'bye'.
+   */
   public void run() {
     Scanner in = new Scanner(System.in);
 
@@ -102,13 +114,14 @@ public class ChatBot {
         ui.showError("I'm sorry, but I don't know what that means :-(");
       }
 
-      /*
-      * Write into File
-      */
       storage.saveTasks(tasks);
     }
   }
 
+  /*
+   * The main entry point of Chatbot application.
+   * Creates an instance of ChatBot object and starts the application.
+   */
   public static void main(String[] args) {
     new ChatBot().run();
   }

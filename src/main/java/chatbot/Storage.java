@@ -8,13 +8,27 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+/*
+ * Handles reading and writing of tasks to a storage file.
+ * Has methods to load tasks from a file and another method to load list into a file.
+ */
 public class Storage {
   private String filePath;
   
+  /*
+   * Constructs a Storage object with a file path.
+   * 
+   * @param filePath The path of the file where tasks are stored.
+   */
   public Storage(String filePath) {
     this.filePath = filePath;
   }
 
+  /*
+   * Loads tasks from storage file and returns the tasks as a TaskList Object.
+   * 
+   * @return A TaskList Object containing all the tasks from the file.
+   */
   public TaskList loadTasks() {
     TaskList tasks = new TaskList();
     try (Scanner fileScanner = new Scanner(new File(filePath))) {
@@ -39,6 +53,11 @@ public class Storage {
     return tasks;
   }
 
+  /*
+   * Saves the tasks from the given TaskList Object into the Storage File.
+   * 
+   * @param tasks The TaskList Object that contains tasks to be saved into Storage File.
+   */
   public void saveTasks(TaskList tasks) {
     try (PrintWriter writer = new PrintWriter(filePath)) {
       ArrayList<Task> tasksArr = tasks.getTasks();
