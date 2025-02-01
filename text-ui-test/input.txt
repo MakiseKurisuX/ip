@@ -1,0 +1,9 @@
+todo work1
+todo work2
+mark 1
+list
+unmark 1
+event project meeting /from 02/03/1999 1400 /to 02/03/1999 1600
+deadline tomorrow /by 19/1/2001
+list
+bye
