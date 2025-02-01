@@ -86,7 +86,7 @@ public class TaskList {
     if (index < 0 || index >= tasks.size()) {
       throw new HeliosException("You input an invalid number");
     }
-    tasks.get(index).setisDone(true);
+    tasks.get(index).setIsDone(true);
   }
 
   /*
@@ -99,7 +99,7 @@ public class TaskList {
     if (index < 0 || index >= tasks.size()) {
       throw new HeliosException("You input an invalid number");
     }
-    tasks.get(index).setisDone(false);
+    tasks.get(index).setIsDone(false);
   }
 
   /*
