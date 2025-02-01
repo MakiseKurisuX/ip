@@ -44,7 +44,7 @@ public class Storage {
           tasks.addTask(new Event(splittedLine[2], fromToSplitted[0], fromToSplitted[1]));
         }
         if (splittedLine[1].equals("1")) {
-          tasks.getTask(tasks.getSize() - 1).setisDone(true);
+          tasks.getTask(tasks.getSize() - 1).setIsDone(true);
         }
       }
     } catch (IOException e) {
@@ -63,7 +63,7 @@ public class Storage {
       ArrayList<Task> tasksArr = tasks.getTasks();
       for (Task task : tasksArr) {
         String taskType = task instanceof Todo ? "T" : task instanceof Deadline ? "D" : "E";
-        String isDone = task.getisDone() ? "1" : "0";
+        String isDone = task.getIsDone() ? "1" : "0";
         String taskDetails = "";
 
         if (taskType.equals("T")) {

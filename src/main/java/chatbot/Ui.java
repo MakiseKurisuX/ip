@@ -18,7 +18,7 @@ public class Ui {
   /*
    * Reads a single line of input from the user.
    * 
-   * @param The inputted string.
+   * @return The inputted string.
    */
   public String readLine() {
     return scanner.nextLine();

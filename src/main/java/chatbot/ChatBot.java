@@ -54,19 +54,19 @@ public class ChatBot {
         ui.showMessage(tasks.listTasks());
       } else if (task.startsWith("mark")) {
         try {
-          int number = parser.getIndex(task);
-          tasks.markTask(number);
+          int taskIndex = parser.getIndex(task);
+          tasks.markTask(taskIndex);
           ui.showMessage("Nice! I've marked this task as done:\r\n  " +
-                  tasks.getTask(number).getDescription());
+                  tasks.getTask(taskIndex).getDescription());
         } catch (Exception e) {
           ui.showError(e.getMessage());
         }
       } else if (task.startsWith("unmark")) {
         try {
-          int number = parser.getIndex(task);
-          tasks.unmarkTask(number);
+          int taskIndex = parser.getIndex(task);
+          tasks.unmarkTask(taskIndex);
           ui.showMessage("OK, I've marked this task as not done yet:\r\n  " +
-                  tasks.getTask(number).getDescription());
+                  tasks.getTask(taskIndex).getDescription());
         } catch (Exception e) {
           ui.showError(e.getMessage());
         }
@@ -102,11 +102,11 @@ public class ChatBot {
         }
       } else if (task.startsWith("delete")) {
         try {
-          int number = parser.getIndex(task);
+          int taskIndex = parser.getIndex(task);
           ui.showMessage("Noted. I've removed this task:\r\n  " +
-                  tasks.getTask(number).getDescription() +
+                  tasks.getTask(taskIndex).getDescription() +
                   "\nNow you have " + (tasks.getSize()-1) + " tasks in the list.\r");
-          tasks.removeTask(number);
+          tasks.removeTask(taskIndex);
         } catch (Exception e) {
           ui.showError(e.getMessage());
         }

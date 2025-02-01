@@ -1,7 +1,7 @@
 package task;
 
 /*
- * Represents a task with a description, completetion status and type.
+ * Represents a task with a description, completion status and type.
  */
 public class Task {
   
@@ -35,7 +35,7 @@ public class Task {
    * 
    * @return The task description.
    */
-  public String getPureDescription () {
+  public String getPureDescription() {
       return this.description;
   }
 
@@ -44,7 +44,7 @@ public class Task {
    * 
    * @return The task description.
    */
-  public String getDescription () {
+  public String getDescription() {
       return "[" + this.type + "]" + "[" + getStatusIcon() + "] " + this.description;
   }
 
@@ -53,7 +53,7 @@ public class Task {
    * 
    * @return The task completion status.
    */
-  public boolean getisDone() {
+  public boolean getIsDone() {
       return this.isDone;
   }
 
@@ -69,7 +69,7 @@ public class Task {
   /*
    * Sets the completion status of the task to either done or not done.
    */
-  public void setisDone (boolean b) {
+  public void setIsDone(boolean b) {
       this.isDone = b;
   }
 }

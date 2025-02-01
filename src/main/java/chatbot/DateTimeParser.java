@@ -13,12 +13,13 @@ public class DateTimeParser {
   private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
   private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
   private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
-  private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
+  private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");\
+  private static final LocalTime DEFAULT_TIME = LocalTime.of(10, 0);
 
   /*
    * Parses a date-time string into a LocalDateTime object
    * 
-   * @param Date-Time string to be parsed
+   * @param input Date-Time string to be parsed
    * @return LocalDateTime object representing the parsed date-time
    * @throws IllegalArgumentException if input format is invalid
    */
@@ -28,7 +29,7 @@ public class DateTimeParser {
     } catch (Exception i) {
       try {
         LocalDate dateOnly = LocalDate.parse(input, DATE_FORMAT);
-        return LocalDateTime.of(dateOnly, LocalTime.of(10, 0)); // Java needs random time value to convert into format.
+        return LocalDateTime.of(dateOnly, DEFAULT_TIME); // Java needs random time value to convert into format.
       } catch (Exception e) {
         throw new IllegalArgumentException("Error in parsing Date. Use 'd/M/yyyy HHmm' or 'd/M/yyyy'.");
       }
