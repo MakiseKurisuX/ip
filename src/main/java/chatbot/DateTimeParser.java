@@ -10,58 +10,58 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateTimeParser {
 
-  private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-  private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
-  private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
-  private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
-  private static final LocalTime DEFAULT_TIME = LocalTime.of(10, 0);
+    private static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
+    private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
+    private static final LocalTime DEFAULT_TIME = LocalTime.of(10, 0);
 
-  /*
-   * Parses a date-time string into a LocalDateTime object
-   * 
-   * @param input Date-Time string to be parsed
-   * @return LocalDateTime object representing the parsed date-time
-   * @throws IllegalArgumentException if input format is invalid
-   */
-  public static LocalDateTime parseDateTime (String input) {
-    try {
-      return LocalDateTime.parse(input, DATETIME_FORMAT);
-    } catch (Exception i) {
-      try {
-        LocalDate dateOnly = LocalDate.parse(input, DATE_FORMAT);
-        return LocalDateTime.of(dateOnly, DEFAULT_TIME); // Java needs random time value to convert into format.
-      } catch (Exception e) {
-        throw new IllegalArgumentException("Error in parsing Date. Use 'd/M/yyyy HHmm' or 'd/M/yyyy'.");
-      }
+    /*
+     * Parses a date-time string into a LocalDateTime object
+     * 
+     * @param input Date-Time string to be parsed
+     * @return LocalDateTime object representing the parsed date-time
+     * @throws IllegalArgumentException if input format is invalid
+     */
+    public static LocalDateTime parseDateTime (String input) {
+        try {
+            return LocalDateTime.parse(input, DATETIME_FORMAT);
+        } catch (Exception i) {
+            try {
+                LocalDate dateOnly = LocalDate.parse(input, DATE_FORMAT);
+                return LocalDateTime.of(dateOnly, DEFAULT_TIME); // Java needs random time value to convert into format.
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Error in parsing Date. Use 'd/M/yyyy HHmm' or 'd/M/yyyy'.");
+            }
+        }
     }
-  }
 
-  /*
-   * Converts a LocalDateTime object back into String representation
-   * 
-   * @param The LocalDateTime object to be converted
-   * @return String representing the converted LocalDateTime object
-   */
-  public static String stringDateTime(LocalDateTime dateTime) {
-    if (dateTime.toLocalTime().equals(LocalTime.MIDNIGHT)) {
-      return dateTime.format(DATE_FORMAT); 
-    } else {
-      return dateTime.format(DATETIME_FORMAT); 
+    /*
+     * Converts a LocalDateTime object back into String representation
+     * 
+     * @param The LocalDateTime object to be converted
+     * @return String representing the converted LocalDateTime object
+     */
+    public static String stringDateTime(LocalDateTime dateTime) {
+        if (dateTime.toLocalTime().equals(LocalTime.MIDNIGHT)) {
+            return dateTime.format(DATE_FORMAT); 
+        } else {
+            return dateTime.format(DATETIME_FORMAT); 
+        }
     }
-  }
 
-  /*
-   * Converts a LocalDateTime object back into a different String representation
-   * 
-   * @param The LocalDateTime object to be converted
-   * @return String representing the converted LocalDateTime object
-   */
-  public static String formatDateTime(LocalDateTime dateTime) {
-    if (dateTime.toLocalTime().equals(LocalTime.MIDNIGHT)) {
-      return dateTime.format(OUTPUT_DATE_FORMAT); 
-    } else {
-      return dateTime.format(OUTPUT_DATETIME_FORMAT); 
+    /*
+     * Converts a LocalDateTime object back into a different String representation
+     * 
+     * @param The LocalDateTime object to be converted
+     * @return String representing the converted LocalDateTime object
+     */
+    public static String formatDateTime(LocalDateTime dateTime) {
+        if (dateTime.toLocalTime().equals(LocalTime.MIDNIGHT)) {
+            return dateTime.format(OUTPUT_DATE_FORMAT); 
+        } else {
+            return dateTime.format(OUTPUT_DATETIME_FORMAT); 
+        }
     }
-  }
 
 }
