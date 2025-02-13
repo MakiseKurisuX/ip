@@ -16,7 +16,7 @@ public class ChatBot {
     public ChatBot() {
         ui = new Ui();
         tasks = new TaskList();
-        storage = new Storage("/data/helios.txt");
+        storage = new Storage("src/main/data/helios.txt");
         parser = new Parser();
         tasks = storage.loadTasks();
     }
@@ -100,6 +100,13 @@ public class ChatBot {
             try {
                 String keyword = parser.getKeyword(input);
                 return tasks.findTasks(keyword);
+            } catch (Exception e) {
+                return "Error: " + e.getMessage();
+            }
+        } else if (input.equals("sort")) {
+            try {
+                tasks.sortTasks();
+                return "Tasks have been sorted!";
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }

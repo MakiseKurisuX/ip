@@ -42,4 +42,15 @@ public class Deadline extends Task {
     public String getDescription() {
         return super.getDescription() + " (by: " + DateTimeParser.formatDateTime(by) + ")";
     }
+
+    /**
+     * Retrieves the due date and time of this deadline task.
+     *
+     * @return A LocalDateTime representing the deadline's due date and time.
+     */
+    @Override
+    public LocalDateTime getSortKey() {
+        return this.by;
+    }
+
 }

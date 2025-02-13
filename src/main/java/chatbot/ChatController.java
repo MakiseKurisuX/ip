@@ -28,6 +28,8 @@ public class ChatController {
     public void initialize() {
         dialogContainer.heightProperty().addListener((obs, oldHeight, newHeight) -> 
             root.setPrefHeight(newHeight.doubleValue() + 50));
+        String welcomeMessage = "Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n";
+        dialogContainer.getChildren().add(new DialogBox(welcomeMessage, botImage, false));
     }
 
     /*

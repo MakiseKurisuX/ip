@@ -27,20 +27,15 @@ public class Ui {
     /*
      * Displays welcome message.
      */
-    public void welcomeMessage() {
-        System.out.println("____________________________________________________________\r\n" + //
-                        " Hello! I'm Ervin Chatbot!\r\n" + //
-                        " What can I do for you?\r\n" + //
-                        "____________________________________________________________\r\n");
+    public String welcomeMessage() {
+        return " Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n" ;
     }
 
     /*
      * Displays goodbye message for when user inputs 'bye'.
      */
-    public void goodbyeMessage() {
-        System.out.println("____________________________________________________________\r\n" + //
-                                "Bye. Hope to see you again soon!" + "\n" + //
-                                "____________________________________________________________\r\n");
+    public String goodbyeMessage() {
+        return "Bye. Hope to see you again soon!" ;
     }
 
     /*

@@ -1,5 +1,7 @@
 package task;
 
+import java.time.LocalDateTime;
+
 /*
  * Represents a task with a description, completion status and type.
  */
@@ -71,5 +73,21 @@ public class Task {
      */
     public void setIsDone(boolean b) {
         this.isDone = b;
+    }
+
+    /*
+     * Returns the sorting key.
+     * Default implementation returns null, to be overriden by subclasses.
+     */
+    public LocalDateTime getSortKey() {
+        return null;
+    }
+
+    /*
+     * Returns the second sorting key.
+     * Default implementation returns null, to be overriden by subclasses.
+     */
+    public LocalDateTime getSortKey2() {
+        return null;
     }
 }

@@ -1,9 +1,12 @@
 package chatbot;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.time.LocalDateTime;
 
 import task.Task;
 import task.Event;
-import task.Task;
+import task.Deadline;
 import task.Todo;
 import task.HeliosException;
 
@@ -141,5 +144,35 @@ public class TaskList {
             return "There are no matching tasks!";
         }
         return returnedString;
+    }
+
+    /*
+     * Sorts the tasks chronologically by the following order:
+     * - First sorted by their first sorting key [by for Deadline, From for Event]
+     * - Then sorted by their second sorting key [to for Event]
+     * - Tasks do not have a deadline and are thus sorted as lowest priority.
+     */
+    public void sortTasks() {
+        System.out.println(tasks.size());
+        Collections.sort(tasks, (t1, t2) -> {
+            LocalDateTime key1 = t1.getSortKey();
+            LocalDateTime key2 = t2.getSortKey();
+            if (key1 == null && key2 == null) {
+                return 0; 
+            } else if (key1 == null) {
+                return 1; 
+            } else if (key2 == null) {
+                return -1; 
+            }
+            if (t1 instanceof Event && t2 instanceof Event) {
+                if (t1.getSortKey().equals(t2.getSortKey())) {
+                    return t1.getSortKey2().compareTo(t2.getSortKey2());
+                } else {
+                    return t1.getSortKey().compareTo(t2.getSortKey());
+                }
+            } else {
+                return t1.getSortKey().compareTo(t2.getSortKey());
+            }
+        });
     }
 }

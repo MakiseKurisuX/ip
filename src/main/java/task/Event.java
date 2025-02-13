@@ -10,8 +10,8 @@ import chatbot.DateTimeParser;
  * Inherits from the Task Class.
  */
 public class Event extends Task {
-    private LocalDateTime  from;
-    private LocalDateTime  to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /*
      * Constructor for an Event task with a description, start time and end time.
@@ -54,4 +54,24 @@ public class Event extends Task {
     public String getDescription() {
         return super.getDescription() + " (from: " + DateTimeParser.formatDateTime(this.from) + " to: " + DateTimeParser.formatDateTime(this.to) + ")";
     }
+
+    /**
+     * Retrieves the start date and time of this event task.
+     *
+     * @return A LocalDateTime representing the event's start date and time.
+     */
+    @Override
+    public LocalDateTime getSortKey() {
+        return this.from;
+    }
+
+    /**
+     * Retrieves the end date and time of this event task.
+     *
+     * @return A LocalDateTime representing the event's end date and time.
+     */
+    public LocalDateTime getSortKey2() {
+        return this.to;
+    }
+
 }
