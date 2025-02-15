@@ -33,8 +33,9 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(50);
 
         text.setWrapText(true);
-        text.setMaxWidth(250);
+        text.setMaxWidth(Double.MAX_VALUE);
         text.setPadding(new Insets(10));
+
         text.setBackground(new Background(new BackgroundFill(
                 isUser ? Color.LIGHTBLUE : Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY
         )));

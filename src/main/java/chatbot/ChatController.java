@@ -2,6 +2,7 @@ package chatbot;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
  */
 public class ChatController {
     @FXML private AnchorPane root;
+    @FXML private ScrollPane scrollPane;
     @FXML private VBox dialogContainer;
     @FXML private TextField userInput;
     @FXML private Button sendButton;
@@ -26,8 +28,7 @@ public class ChatController {
      */
     @FXML
     public void initialize() {
-        dialogContainer.heightProperty().addListener((obs, oldHeight, newHeight) -> 
-            root.setPrefHeight(newHeight.doubleValue() + 50));
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcomeMessage = "Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n";
         dialogContainer.getChildren().add(new DialogBox(welcomeMessage, botImage, false));
     }
@@ -45,6 +46,8 @@ public class ChatController {
             dialogContainer.getChildren().add(new DialogBox(input, userImage, true));
             String response = chatbot.getResponse(input);
             dialogContainer.getChildren().add(new DialogBox(response, botImage, false));
+            scrollPane.vvalueProperty().unbind();
+            scrollPane.setVvalue(1.0);
             userInput.clear();
         }
     }

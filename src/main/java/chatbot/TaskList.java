@@ -153,7 +153,6 @@ public class TaskList {
      * - Tasks do not have a deadline and are thus sorted as lowest priority.
      */
     public void sortTasks() {
-        System.out.println(tasks.size());
         Collections.sort(tasks, (t1, t2) -> {
             LocalDateTime key1 = t1.getSortKey();
             LocalDateTime key2 = t2.getSortKey();
