@@ -26,6 +26,7 @@ public class DialogBox extends HBox {
      * @param isUser Boolean indicating whether message is from user or the chatbot.
      */
     public DialogBox(String message, Image img, boolean isUser) {
+        assert message != null && !message.isEmpty() : "Message cannot be null or empty!";
         text = new Label(message);
         displayPicture = new ImageView(img);
 
