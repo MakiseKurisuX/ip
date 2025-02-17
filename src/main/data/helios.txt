@@ -1,6 +1,7 @@
 E | 0 | project meeting | 2/3/1999 1400 - 2/3/1999 1600
 E | 0 | project meeting | 2/3/1999 1400 - 2/3/1999 1700
 E | 0 | project meeting | 2/3/1999 1400 - 2/3/1999 1900
+E | 0 | project meeting | 2/3/1999 1500 - 2/3/1999 1900
 D | 0 | tomorrow | 19/1/2001 1000
 T | 0 | work1
 T | 1 | work2

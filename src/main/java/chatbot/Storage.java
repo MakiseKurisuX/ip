@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import task.Deadline;
 import task.Event;
+import task.HeliosException;
 import task.Task;
 import task.Todo;
 
@@ -38,7 +39,7 @@ public class Storage {
      * 
      * @return A TaskList Object containing all the tasks from the file.
      */
-    public TaskList loadTasks() {
+    public TaskList loadTasks() throws HeliosException {
         TaskList tasks = new TaskList();
         try (Scanner fileScanner = new Scanner(new File(filePath))) {
             while (fileScanner.hasNextLine()) {

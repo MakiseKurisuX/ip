@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
+import task.HeliosException;
 
 /*
  * Controller class to manage chatbot user interface.
@@ -19,7 +20,7 @@ public class ChatController {
     @FXML private TextField userInput;
     @FXML private Button sendButton;
 
-    private ChatBot chatbot = new ChatBot();
+    private ChatBot chatbot;
     private Image userImage = new Image(getClass().getResourceAsStream("/images/user.jpg"));
     private Image botImage = new Image(getClass().getResourceAsStream("/images/bot.png"));
 
@@ -27,10 +28,15 @@ public class ChatController {
      * Initializes the controller after the FXML file is loaded.
      */
     @FXML
-    public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMessage = "Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n";
-        dialogContainer.getChildren().add(new DialogBox(welcomeMessage, botImage, false));
+    public void initialize() throws HeliosException {
+        try {
+            chatbot = new ChatBot();
+            scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+            String welcomeMessage = "Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n";
+            dialogContainer.getChildren().add(new DialogBox(welcomeMessage, botImage, false));
+        } catch (HeliosException e) {
+            System.out.println("Error initializing chatbot: " + e.getMessage());
+        }
     }
 
     /*
@@ -40,7 +46,7 @@ public class ChatController {
      * Clears the input field after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws HeliosException {
         String input = userInput.getText();
         if (!input.trim().isEmpty()) {
             dialogContainer.getChildren().add(new DialogBox(input, userImage, true));

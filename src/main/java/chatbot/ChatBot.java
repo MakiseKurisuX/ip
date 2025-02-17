@@ -1,5 +1,7 @@
 package chatbot;
 
+import task.HeliosException;
+
 /**
  * The ChatBot class represents a simple chatbot application
  * that manages tasks such as ToDos, Deadlines, and Events.
@@ -13,7 +15,7 @@ public class ChatBot {
     /**
      * Constructor to create a ChatBot instance.
      */
-    public ChatBot() {
+    public ChatBot() throws HeliosException {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage("src/main/data/helios.txt");
