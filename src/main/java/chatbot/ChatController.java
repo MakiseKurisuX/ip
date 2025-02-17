@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
+
 import task.HeliosException;
 
 /*
@@ -14,6 +15,12 @@ import task.HeliosException;
  * This class handles user input, chatbot responses, and updates the UI.
  */
 public class ChatController {
+    private static final String WELCOME_MESSAGE = "Hello! I'm Ervin Chatbot!\nWhat can I do for you?\n";
+    private static final String USER_IMAGE_PATH = "/images/user.jpg";
+    private static final String BOT_IMAGE_PATH = "/images/bot.png";
+
+    private static final double SCROLL_TO_BOTTOM = 1.0;
+
     @FXML private AnchorPane root;
     @FXML private ScrollPane scrollPane;
     @FXML private VBox dialogContainer;
@@ -21,8 +28,8 @@ public class ChatController {
     @FXML private Button sendButton;
 
     private ChatBot chatbot;
-    private Image userImage = new Image(getClass().getResourceAsStream("/images/user.jpg"));
-    private Image botImage = new Image(getClass().getResourceAsStream("/images/bot.png"));
+    private Image userImage = new Image(getClass().getResourceAsStream(USER_IMAGE_PATH));
+    private Image botImage = new Image(getClass().getResourceAsStream(BOT_IMAGE_PATH));
 
     /*
      * Initializes the controller after the FXML file is loaded.
@@ -32,8 +39,7 @@ public class ChatController {
         try {
             chatbot = new ChatBot();
             scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-            String welcomeMessage = "Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n";
-            dialogContainer.getChildren().add(new DialogBox(welcomeMessage, botImage, false));
+            dialogContainer.getChildren().add(new DialogBox(WELCOME_MESSAGE, botImage, false));
         } catch (HeliosException e) {
             System.out.println("Error initializing chatbot: " + e.getMessage());
         }
@@ -53,7 +59,7 @@ public class ChatController {
             String response = chatbot.getResponse(input);
             dialogContainer.getChildren().add(new DialogBox(response, botImage, false));
             scrollPane.vvalueProperty().unbind();
-            scrollPane.setVvalue(1.0);
+            scrollPane.setVvalue(SCROLL_TO_BOTTOM);
             userInput.clear();
         }
     }
