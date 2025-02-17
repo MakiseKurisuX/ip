@@ -1,5 +1,6 @@
 package chatbot;
 import java.util.Scanner;
+import task.Task;
 
 /*
  * The Ui class handles the interactions with the user.
@@ -24,39 +25,84 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    /*
+    /**
      * Displays welcome message.
+     *
+     * @return Welcome message string.
      */
     public String welcomeMessage() {
-        return " Hello! I'm Ervin Chatbot!\r\n" + " What can I do for you?\r\n" ;
+        return "Hello! I'm Ervin Chatbot!\nWhat can I do for you?";
     }
 
-    /*
-     * Displays goodbye message for when user inputs 'bye'.
+    /**
+     * Displays goodbye message for when the user inputs 'bye'.
+     *
+     * @return Goodbye message string.
      */
     public String goodbyeMessage() {
-        return "Bye. Hope to see you again soon!" ;
+        return "Bye. Hope to see you again soon!";
     }
 
-    /*
-     * Displays a given message.
-     * 
-     * @param message The message to be displayed.
+    /**
+     * Displays a message when a task is marked as done.
+     *
+     * @param task The task that was marked as done.
+     * @return Formatted message.
      */
-    public void showMessage(String message) {
-        System.out.println("____________________________________________________________\r\n" + //
-                                message + "\n" + //
-                                "____________________________________________________________\r\n");
+    public String showMarkMessage(Task task) {
+        return "Nice! I've marked this task as done:\n" + task.getDescription();
     }
 
-    /*
-     * Displays an error message with an "OOPS!!!" prefix.
-     * 
-     * @param error The error message to be displayed.
+    /**
+     * Displays a message when a task is unmarked.
+     *
+     * @param task The task that was unmarked.
+     * @return Formatted message.
      */
-    public void showError(String error) {
-        System.out.println("____________________________________________________________\r\n" + //
-                                "OOPS!!! " + error + "\n" + //
-                                "____________________________________________________________\r\n");
+    public String showUnmarkMessage(Task task) {
+        return "OK, I've marked this task as not done yet:\n" + task.getDescription();
+    }
+
+    /**
+     * Displays a message when a task is added.
+     *
+     * @param task The task that was added.
+     * @param size The number of tasks in the list after addition.
+     * @return Formatted message.
+     */
+    public String showAddTaskMessage(Task task, int size) {
+        return "Got it. I've added this task:\n" + task.getDescription() +
+               "\nNow you have " + size + " tasks.";
+    }
+
+    /**
+     * Displays a message when a task is deleted.
+     *
+     * @param taskDesc The description of the task that was deleted.
+     * @param size The number of tasks left in the list.
+     * @return Formatted message.
+     */
+    public String showDeleteMessage(String taskDesc, int size) {
+        return "Noted. I've removed this task:\n" + taskDesc +
+               "\nNow you have " + size + " tasks.";
+    }
+
+    /**
+     * Displays a message when tasks are sorted.
+     *
+     * @return Formatted message.
+     */
+    public String showSortMessage() {
+        return "Tasks have been sorted!";
+    }
+
+    /**
+     * Displays an error message.
+     *
+     * @param error The error message.
+     * @return Formatted error message.
+     */
+    public String showErrorMessage(String error) {
+        return "Error: " + error;
     }
 }
