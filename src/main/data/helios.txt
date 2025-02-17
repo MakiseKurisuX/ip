@@ -3,4 +3,5 @@ E | 0 | project meeting | 2/3/1999 1400 - 2/3/1999 1700
 E | 0 | project meeting | 2/3/1999 1400 - 2/3/1999 1900
 D | 0 | tomorrow | 19/1/2001 1000
 T | 0 | work1
-T | 0 | work2
+T | 1 | work2
+T | 0 | task3
