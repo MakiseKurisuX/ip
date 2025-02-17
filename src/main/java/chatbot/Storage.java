@@ -31,8 +31,6 @@ public class Storage {
      */
     public TaskList loadTasks() {
         TaskList tasks = new TaskList();
-        System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
-        System.out.println(filePath);
         try (Scanner fileScanner = new Scanner(new File(filePath))) {
             while (fileScanner.hasNextLine()) {
                 String currentLine = fileScanner.nextLine();
