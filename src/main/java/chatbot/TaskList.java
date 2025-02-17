@@ -32,6 +32,17 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Validates if the given index is within the valid range.
+     *
+     * @param index The index to validate.
+     */
+    private void validateIndex(int index) throws HeliosException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new HeliosException("Invalid task index: " + index);
+        }
+    }
+
     /*
      * Adds a task to task list.
      * 
@@ -47,7 +58,8 @@ public class TaskList {
      * @param index The zero-based index of the task to be removed.
      * @return The removed task.
      */
-    public Task removeTask(int index) {
+    public Task removeTask(int index) throws HeliosException {
+        validateIndex(index);
         return tasks.remove(index);
     }
 
@@ -57,7 +69,8 @@ public class TaskList {
      * @param index The zero-based index of the task to be returned.
      * @return The task to be returned.
      */
-    public Task getTask(int index) {
+    public Task getTask(int index) throws HeliosException {
+        validateIndex(index);
         return tasks.get(index);
     }
 
@@ -86,9 +99,7 @@ public class TaskList {
      * @throws HeliosException If the index is out of bounds.
      */
     public void markTask(int index) throws HeliosException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new HeliosException("You input an invalid number");
-        }
+        validateIndex(index);
         tasks.get(index).setIsDone(true);
     }
 
@@ -99,9 +110,7 @@ public class TaskList {
      * @throws HeliosException If the index is out of bounds.
      */
     public void unmarkTask(int index) throws HeliosException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new HeliosException("You input an invalid number");
-        }
+        validateIndex(index);
         tasks.get(index).setIsDone(false);
     }
 
@@ -115,10 +124,9 @@ public class TaskList {
         String returnedString = "";
         if (tasks.size() == 0) {
             return "No tasks available.";
-        } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                returnedString += (i + 1) + ". " + tasks.get(i).getDescription() + "\n";
-            }
+        } 
+        for (int i = 0; i < tasks.size(); i++) {
+            returnedString += (i + 1) + ". " + tasks.get(i).getDescription() + "\n";
         }
         return returnedString;
     }
@@ -130,14 +138,10 @@ public class TaskList {
      * @return A formatted string containing all tasks that match the keyword.
      */
     public String findTasks(String keyword) {
-        String returnedString = "Here are all the matching tasks in your list";
+        String returnedString = "Here are all the matching tasks in your list:";
         for (Task task : tasks) {
-            String[] descriptionWords = task.getPureDescription().split(" ");
-            for (String word : descriptionWords) {
-                if (word.trim().equals(keyword)) {
-                    returnedString += "\n" + task.getDescription();
-                    break;
-                }
+            if (task.getPureDescription().contains(keyword)) {
+                returnedString += "\n" + task.getDescription();
             }
         }
         if (returnedString.equals("Here are all the matching tasks in your list")) {
@@ -153,25 +157,36 @@ public class TaskList {
      * - Tasks do not have a deadline and are thus sorted as lowest priority.
      */
     public void sortTasks() {
-        Collections.sort(tasks, (t1, t2) -> {
-            LocalDateTime key1 = t1.getSortKey();
-            LocalDateTime key2 = t2.getSortKey();
-            if (key1 == null && key2 == null) {
-                return 0; 
-            } else if (key1 == null) {
-                return 1; 
-            } else if (key2 == null) {
-                return -1; 
-            }
-            if (t1 instanceof Event && t2 instanceof Event) {
-                if (t1.getSortKey().equals(t2.getSortKey())) {
-                    return t1.getSortKey2().compareTo(t2.getSortKey2());
-                } else {
-                    return t1.getSortKey().compareTo(t2.getSortKey());
-                }
-            } else {
-                return t1.getSortKey().compareTo(t2.getSortKey());
-            }
-        });
+        tasks.sort(this::compareTasks);
+    }
+
+    /**
+     * Compares two tasks based on their chronological order.
+     *
+     * @param task1 The first task.
+     * @param task2 The second task.
+     * @return A negative number if task1 comes before task2, a positive number if task1 comes after task2, and 0 if they are equal.
+     */
+    private int compareTasks(Task task1, Task task2) {
+        LocalDateTime key1 = task1.getSortKey();
+        LocalDateTime key2 = task2.getSortKey();
+
+        if (key1 == null && key2 == null) {
+            return 0;
+        }
+        if (key1 == null) {
+            return 1;
+        }
+        if (key2 == null) {
+            return -1;
+        }
+
+        if (task1 instanceof Event && task2 instanceof Event) {
+            int primaryComparison = key1.compareTo(key2);
+            return (primaryComparison != 0) ? primaryComparison :
+                    ((Event) task1).getSortKey2().compareTo(((Event) task2).getSortKey2());
+        }
+
+        return key1.compareTo(key2);
     }
 }
