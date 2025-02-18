@@ -15,7 +15,7 @@ import task.HeliosException;
  * This class handles user input, chatbot responses, and updates the UI.
  */
 public class ChatController {
-    private static final String WELCOME_MESSAGE = "Hello! I'm Ervin Chatbot!\nWhat can I do for you?\n";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Helios Chatbot!\nWhat can I do for you?\n";
     private static final String USER_IMAGE_PATH = "/images/user.jpg";
     private static final String BOT_IMAGE_PATH = "/images/bot.png";
 
