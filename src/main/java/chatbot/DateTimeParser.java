@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /*
  * Utility class for parsing and formatting date and time values.
@@ -14,7 +15,7 @@ public class DateTimeParser {
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter OUTPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
-    private static final LocalTime DEFAULT_TIME = LocalTime.of(10, 0);
+    private static final LocalTime DEFAULT_TIME_FOR_DATE_ONLY = LocalTime.of(10, 0);
 
     /*
      * Parses a date-time string into a LocalDateTime object
@@ -26,11 +27,11 @@ public class DateTimeParser {
     public static LocalDateTime parseDateTime (String input) {
         try {
             return LocalDateTime.parse(input, DATETIME_FORMAT);
-        } catch (Exception i) {
+        } catch (DateTimeParseException e) {
             try {
                 LocalDate dateOnly = LocalDate.parse(input, DATE_FORMAT);
-                return LocalDateTime.of(dateOnly, DEFAULT_TIME); // Java needs random time value to convert into format.
-            } catch (Exception e) {
+                return LocalDateTime.of(dateOnly, DEFAULT_TIME_FOR_DATE_ONLY); // Java needs random time value to convert into format.
+            } catch (DateTimeParseException ex) {
                 throw new IllegalArgumentException("Error in parsing Date. Use 'd/M/yyyy HHmm' or 'd/M/yyyy'.");
             }
         }
@@ -39,7 +40,7 @@ public class DateTimeParser {
     /*
      * Converts a LocalDateTime object back into String representation
      * 
-     * @param The LocalDateTime object to be converted
+     * @param dateTime The LocalDateTime object to be converted
      * @return String representing the converted LocalDateTime object
      */
     public static String stringDateTime(LocalDateTime dateTime) {
@@ -53,7 +54,7 @@ public class DateTimeParser {
     /*
      * Converts a LocalDateTime object back into a different String representation
      * 
-     * @param The LocalDateTime object to be converted
+     * @param dateTime The LocalDateTime object to be converted
      * @return String representing the converted LocalDateTime object
      */
     public static String formatDateTime(LocalDateTime dateTime) {

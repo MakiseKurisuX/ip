@@ -15,6 +15,11 @@ import javafx.scene.paint.Color;
  * Represents dialog box in the UI, displaying chat messages along with profile picture.
  */
 public class DialogBox extends HBox {
+    private static final int IMAGE_SIZE = 50;
+    private static final int TEXT_PADDING = 10;
+    private static final int CORNER_RADIUS = 10;
+    private static final int SPACING = 10;
+
     private Label text;
     private ImageView displayPicture;
 
@@ -30,15 +35,15 @@ public class DialogBox extends HBox {
         text = new Label(message);
         displayPicture = new ImageView(img);
 
-        displayPicture.setFitWidth(50);
-        displayPicture.setFitHeight(50);
+        displayPicture.setFitWidth(IMAGE_SIZE);
+        displayPicture.setFitHeight(IMAGE_SIZE);
 
         text.setWrapText(true);
         text.setMaxWidth(Double.MAX_VALUE);
-        text.setPadding(new Insets(10));
+        text.setPadding(new Insets(TEXT_PADDING));
 
         text.setBackground(new Background(new BackgroundFill(
-                isUser ? Color.LIGHTBLUE : Color.LIGHTGRAY, new CornerRadii(10), Insets.EMPTY
+                isUser ? Color.LIGHTBLUE : Color.LIGHTGRAY, new CornerRadii(CORNER_RADIUS), Insets.EMPTY
         )));
 
         if (isUser) {
@@ -49,6 +54,6 @@ public class DialogBox extends HBox {
             this.getChildren().addAll(displayPicture, text);
         }
 
-        this.setSpacing(10);
+        this.setSpacing(SPACING);
     }
 }
