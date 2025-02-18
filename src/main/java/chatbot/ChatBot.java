@@ -96,7 +96,7 @@ public class ChatBot {
             tasks.addTask(new task.Deadline(parts[0], parts[1]));
             storage.saveTasks(tasks);
             assert tasks.getSize() == prevSize + 1 : "TaskList size did not increase after adding a deadline!";
-            assert tasks.getTask(tasks.getSize() - 1) instanceof task.Deadline 
+            assert tasks.getTask(tasks.getSize() - 1) instanceof task.Deadline;
             return ui.showAddTaskMessage(tasks.getTask(tasks.getSize() - 1), tasks.getSize());
         } catch (Exception e) {
             return ui.showErrorMessage(e.getMessage());
@@ -118,7 +118,7 @@ public class ChatBot {
             tasks.addTask(new task.Event(parts[0], parts[1], parts[2]));
             storage.saveTasks(tasks);
             assert tasks.getSize() == prevSize + 1 : "TaskList size did not increase after adding an event!";
-            assert tasks.getTask(tasks.getSize() - 1) instanceof task.Event 
+            assert tasks.getTask(tasks.getSize() - 1) instanceof task.Event;
             return ui.showAddTaskMessage(tasks.getTask(tasks.getSize() - 1), tasks.getSize());
         } catch (Exception e) {
             return ui.showErrorMessage(e.getMessage());
