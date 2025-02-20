@@ -59,7 +59,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "chatbot"
+    archiveBaseName = "helios"
     archiveClassifier = null
 }
 

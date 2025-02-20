@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatbot.ChatController">
+<AnchorPane fx:id="root" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.7" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chatbot.ChatController">
 
     <ScrollPane fx:id="scrollPane" fitToWidth="true"
             AnchorPane.topAnchor="0.0"
