@@ -34,6 +34,21 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates the parent directory for the file specified by {@code filePath} if it does not exist.
+     */
+    private void createDirectoryIfNotExists() {
+        File file = new File(filePath);
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            if (parentDir.mkdirs()) {
+                System.out.println("Directory created successfully.");
+            } else {
+                System.err.println("Failed to create directory.");
+            }
+        }
+    }
+
     /*
      * Loads tasks from storage file and returns the tasks as a TaskList Object.
      * 
@@ -61,6 +76,7 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("File does not exist. Creating File.");
+            createDirectoryIfNotExists();
         }
         return tasks;
     }
