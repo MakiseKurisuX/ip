@@ -14,15 +14,15 @@ public class TodoTest {
         
         assertEquals("T", todo.getType());
         
-        assertEquals(false, todo.getisDone());
+        assertEquals(false, todo.getIsDone());
     }
 
     @Test
     public void testMarkAsDone() {
         Todo todo = new Todo("Read a book");
-        todo.setisDone(true); 
+        todo.setIsDone(true); 
         
-        assertEquals(true, todo.getisDone());
+        assertEquals(true, todo.getIsDone());
     }
 }
 

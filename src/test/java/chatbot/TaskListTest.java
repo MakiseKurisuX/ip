@@ -19,7 +19,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testAddTask() {
+    public void testAddTask() throws HeliosException {
         Todo todo = new Todo("Buy groceries");
         taskList.addTask(todo);
         
@@ -28,7 +28,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testRemoveTask() {
+    public void testRemoveTask() throws HeliosException {
         Todo todo1 = new Todo("Read a book");
         Todo todo2 = new Todo("Go for a run");
         
@@ -46,7 +46,7 @@ public class TaskListTest {
         taskList.addTask(todo);
         
         taskList.markTask(0);
-        assertTrue(taskList.getTask(0).getisDone());
+        assertTrue(taskList.getTask(0).getIsDone());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class TaskListTest {
         taskList.markTask(0);
         taskList.unmarkTask(0);
         
-        assertFalse(taskList.getTask(0).getisDone());
+        assertFalse(taskList.getTask(0).getIsDone());
     }
 
     @Test
