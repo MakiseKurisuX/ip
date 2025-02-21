@@ -20,10 +20,15 @@ public class Event extends Task {
      * @param from Start time of the event. Converted to a LocalDateTime object using DateTimeParser.
      * @param to End time of the event. Converted to a LocalDateTime object using DateTimeParser.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws HeliosException {
         super(description, "E");
-        this.from = DateTimeParser.parseDateTime(from);  
-        this.to = DateTimeParser.parseDateTime(to);
+        LocalDateTime fromTime = DateTimeParser.parseDateTime(from);
+        LocalDateTime toTime = DateTimeParser.parseDateTime(to);
+        if (!toTime.isAfter(fromTime)) {
+            throw new IllegalArgumentException("End time must be later than start time!");
+        }
+        this.from = fromTime;
+        this.to = toTime;
     }
 
     /*
