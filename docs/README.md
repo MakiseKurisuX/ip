@@ -1,6 +1,6 @@
 # Helios ChatBot User Guide
 
-Helios is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ChatBot can help you manage your tasks more efficiently than traditional GUI apps.
+Helios is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Helios can help you manage your tasks more efficiently than traditional GUI apps.
 
 ## Quick Start
 
