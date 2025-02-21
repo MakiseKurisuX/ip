@@ -29,7 +29,11 @@ public class Parser {
         if (parts.length < INDEX_INDEX + 1) {
             throw new HeliosException("Invalid task index: Please use a valid index.");
         }
-        return Integer.parseInt(parts[INDEX_INDEX]) - 1;
+        try {
+            return Integer.parseInt(parts[INDEX_INDEX]) - 1;
+        } catch (Exception e) {
+            throw new HeliosException("Invalid task index: Please use a valid index.");
+        }
     }
 
     /*
