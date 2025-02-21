@@ -1,5 +1,8 @@
 package chatbot;
 
+import javafx.util.Duration;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
-
+import javafx.scene.input.KeyCode;
 import task.HeliosException;
 
 /*
@@ -40,6 +43,15 @@ public class ChatController {
             chatbot = new ChatBot();
             scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
             dialogContainer.getChildren().add(new DialogBox(WELCOME_MESSAGE, botImage, false));
+            userInput.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    try {
+                        handleUserInput();
+                    } catch (HeliosException e) {
+                        System.out.println("Error handling user input: " + e.getMessage());
+                    }
+                }
+            });
         } catch (HeliosException e) {
             System.out.println("Error initializing chatbot: " + e.getMessage());
         }
@@ -58,6 +70,11 @@ public class ChatController {
             dialogContainer.getChildren().add(new DialogBox(input, userImage, true));
             String response = chatbot.getResponse(input);
             dialogContainer.getChildren().add(new DialogBox(response, botImage, false));
+            if (input.equalsIgnoreCase("bye")) {
+                PauseTransition delay = new PauseTransition(Duration.seconds(1));
+                delay.setOnFinished(event -> Platform.exit());
+                delay.play();
+            }
             scrollPane.vvalueProperty().unbind();
             scrollPane.setVvalue(SCROLL_TO_BOTTOM);
             userInput.clear();
