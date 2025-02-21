@@ -10,6 +10,8 @@ public class Parser {
     private static final int TODO_DESCRIPTION_INDEX = 5;
     private static final int DEADLINE_DESCRIPTION_INDEX = 9;
     private static final int EVENT_DESCRIPTION_INDEX = 6;
+    private static final int INDEX_INDEX = 1;
+    private static final String SPACE_DELIMITER = " ";
     private static final String DEADLINE_DELIMITER = " /by ";
     private static final String EVENT_DELIMITER = " /from | /to ";
     private static final int EXPECTED_DEADLINE_PARTS = 2;
@@ -17,23 +19,17 @@ public class Parser {
     private static final int KEYWORD_INDEX = 5;
 
     /*
-     * Extracts the command from user input.
-     * 
-     * @param task The full user input string.
-     * @param The first word of the input, which is the command.
-     */
-    public String getCommand(String task) {
-        return task.split(" ")[0];
-    }
-
-    /*
      * Extracts and returns the index from a user command.
      * 
      * @param task The full user input string.
      * @return The zero-based index extracted from the input.
      */
-    public int getIndex(String task) {
-        return Integer.parseInt(task.split(" ")[1]) - 1;
+    public int getIndex(String task) throws HeliosException {
+        String[] parts = task.split(SPACE_DELIMITER);
+        if (parts.length < INDEX_INDEX + 1) {
+            throw new HeliosException("Invalid task index: Please use a valid index.");
+        }
+        return Integer.parseInt(parts[INDEX_INDEX]) - 1;
     }
 
     /*
@@ -44,6 +40,9 @@ public class Parser {
      * @throws HeliosException If the description is empty.
      */
     public String getTodoDescription(String task) throws HeliosException {
+        if (task.length() <= TODO_DESCRIPTION_INDEX - 1) {
+            throw new HeliosException("The description of a todo cannot be empty.");
+        }
         String description = task.substring(TODO_DESCRIPTION_INDEX).trim();
         if (description.isEmpty()) {
             throw new HeliosException("The description of a todo cannot be empty.");
@@ -59,6 +58,9 @@ public class Parser {
      * @throws HeliosException If the description is empty.
      */
     public String[] getDeadlineParts(String task) throws HeliosException {
+        if (task.length() <= DEADLINE_DESCRIPTION_INDEX - 1) {
+            throw new HeliosException("The description of a deadline cannot be empty.");
+        }
         String rawInput = task.substring(DEADLINE_DESCRIPTION_INDEX).trim();
         String[] parts = rawInput.split(DEADLINE_DELIMITER, 2);
         if (parts.length == 1) { 
@@ -83,6 +85,9 @@ public class Parser {
      * @throws HeliosException If the description is empty.
      */
     public String[] getEventParts(String task) throws HeliosException {
+        if (task.length() <= EVENT_DESCRIPTION_INDEX - 1) {
+            throw new HeliosException("The description of an event cannot be empty.");
+        }
         String rawInput = task.substring(EVENT_DESCRIPTION_INDEX).trim();
         String[] parts = rawInput.split(EVENT_DELIMITER, 3);
         if (parts.length == 1) { 
@@ -110,6 +115,9 @@ public class Parser {
      * @throws HeliosException If the description is empty.
      */
     public String getKeyword(String task) throws HeliosException {
+        if (task.length() <= KEYWORD_INDEX - 1) {
+            throw new HeliosException("You must input a keyword.");
+        }
         String keyword = task.substring(KEYWORD_INDEX).trim();
         if (keyword.isEmpty()) {
             throw new HeliosException("You must input a keyword.");

@@ -39,7 +39,7 @@ public class TaskList {
      */
     private void validateIndex(int index) throws HeliosException {
         if (index < 0 || index >= tasks.size()) {
-            throw new HeliosException("Invalid task index: " + index);
+            throw new HeliosException("Invalid task index: Please use a valid index.");
         }
     }
 
