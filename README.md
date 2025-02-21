@@ -13,7 +13,7 @@ Ensure you have **Java 17 or above** installed on your computer.
 3. Open a command terminal, navigate (`cd`) into the folder where you placed the jar file.
 4. Run the application using the command:
    ```sh
-   java -jar chatbot.jar
+   java -jar helios.jar
    ```
 5. A GUI should appear within a few seconds.
 6. Type a command in the command box and press Enter to execute it.
@@ -22,9 +22,9 @@ Ensure you have **Java 17 or above** installed on your computer.
 - `list` : Lists all tasks.
 - `mark INDEX` : Marks the task at the given index as completed.
 - `unmark INDEX` : Unmarks the task at the given index.
-- `add todo DESCRIPTION` : Adds a ToDo task with the given description.
-- `add deadline DESCRIPTION /by TIME` : Adds a Deadline task with a specified deadline.
-- `add event DESCRIPTION /from START /to END` : Adds an Event task with a start and end time.
+- `todo DESCRIPTION` : Adds a ToDo task with the given description.
+- `deadline DESCRIPTION /by TIME` : Adds a Deadline task with a specified deadline [d/M/yyyy [HHmm]].
+- `event DESCRIPTION /from START /to END` : Adds an Event task with a start [d/M/yyyy [HHmm]] and end [d/M/yyyy [HHmm]] time.
 - `delete INDEX` : Deletes the task at the specified index.
 - `find KEYWORD` : Finds tasks containing the given keyword.
 - `sort` : Sorts the tasks chronologically.
@@ -47,16 +47,16 @@ Adds a new task to the task list.
 
 **Format:**
 ```
-add todo DESCRIPTION
-add deadline DESCRIPTION /by TIME
-add event DESCRIPTION /from START /to END
+todo DESCRIPTION
+deadline DESCRIPTION /by TIME
+event DESCRIPTION /from START /to END
 ```
 
 **Examples:**
 ```
-add todo Read Book
-add deadline Submit Assignment /by Monday 5pm
-add event Team Meeting /from Monday 3pm /to Monday 5pm
+todo Read Book
+deadline Submit Assignment /by 21/2/2025 2359 [d/M/yyyy [HHmm]] 
+event Team Meeting /from 20/2/2025 1500 [d/M/yyyy [HHmm]] /to 20/2/2025 1700 [d/M/yyyy [HHmm]] 
 ```
 
 ### Listing All Tasks: `list`
@@ -152,9 +152,9 @@ A: Install the application on the other computer and copy over the `helios.txt` 
 
 | **Action**  | **Format, Examples**  |
 |------------|----------------------|
-| **Add**    | `add todo DESCRIPTION`  |
-|            | `add deadline DESCRIPTION /by TIME`  |
-|            | `add event DESCRIPTION /from START /to END`  |
+| **Add**    | `todo DESCRIPTION`  |
+|            | `deadline DESCRIPTION /by TIME`  |
+|            | `event DESCRIPTION /from START /to END`  |
 | **Mark**   | `mark INDEX` (e.g., `mark 1`)  |
 | **Unmark** | `unmark INDEX` (e.g., `unmark 1`)  |
 | **Delete** | `delete INDEX` (e.g., `delete 3`)  |
